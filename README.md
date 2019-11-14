@@ -1,12 +1,12 @@
-# DragPane
+# drag-pane
 
 Custom element wrapping arbitrary content in a draggable pane.
 Has optional buttons for collapsing content and removing pane entirely.
 
 ```bash
-npm install @bgoodman/drag-pane
+npm install drag-pane
 
-yarn add @bgoodman/drag-pane
+yarn add drag-pane
 ```
 
 ## Usage
