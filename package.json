@@ -1,0 +1,30 @@
+{
+  "name": "drag-pane",
+  "description": "Custom element wrapping arbitary content in a draggable pane.",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "keywords": [
+    "custom-element",
+    "webcomponents",
+    "drag",
+    "pane"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "./node_modules/.bin/serve"
+  },
+  "devDependencies": {
+    "serve": "^11.2.0",
+    "typescript": "^3.7.2"
+  },
+  "author": {
+    "name": "Benjamin Goodman",
+    "email": "b@thebgoodman.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/b-goodman/drag-pane.git"
+  }
+}

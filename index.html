@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <script type="module" src="./dist/index.js"></script>
+    <style>
+        drag-pane {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #a {
+            top: 305px;
+            left: 314px;
+        }
+
+        #b {
+            top: 81px;
+            left: 770px;
+        }
+
+        .text {
+            background-color: white;
+            font-weight: 600;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="pane-bounds">
+
+        <drag-pane heading="Default Pane">
+            <div class="text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+        </drag-pane>
+
+        <drag-pane id='a' heading="Disabled" disabled="true">
+                <div class="text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+        </drag-pane>
+
+        <drag-pane id='b' heading="Hidden Controls" color="#f44336" hide-controls>
+            <img src="http://lorempixel.com/400/200/" />
+        </drag-pane>
+    </div>
+
+</body>
+
+<script>
+
+    const paneWrapper = document.querySelector("#pane-bounds");
+    const panes = document.querySelectorAll("drag-pane");
+
+    const moveToTop = (event) => {
+        paneWrapper.appendChild(event.currentTarget)
+    };
+
+    panes.forEach( (el) => {
+        el.addEventListener("dragstart", moveToTop)
+    });
+
+</script>
+</html>
