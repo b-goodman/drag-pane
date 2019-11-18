@@ -16,7 +16,7 @@ The child element of `drag-pane` becomes the pane's body.
 ```html
 <script type="module" src="./dist/index.js"></script>
 
-<drag-pane title="Default Pane">
+<drag-pane heading="Default Pane">
     <div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
