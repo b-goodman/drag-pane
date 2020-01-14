@@ -52,6 +52,7 @@ class DragPage extends HTMLElement {
 
         #controls {
             display: inline-flex;
+            margin-left: 10px;
         }
 
         .btn {
@@ -106,11 +107,13 @@ class DragPage extends HTMLElement {
         const shadowRoot = this.attachShadow({mode: 'open'});
         shadowRoot.appendChild(template.content.cloneNode(true));
         this.headerRef = this.shadowRoot!.querySelector<HTMLDivElement>("#header")!;
+        this.restorePosition();
     }
 
     public connectedCallback() {
-        this.headerRef.addEventListener("mousedown", this.beginElementDrag)
-        this.headerRef.querySelectorAll<HTMLDivElement>(".btn").forEach( (btnEl) => btnEl.addEventListener("click", this.handleBtnClick))
+        this.headerRef.addEventListener("mousedown", this.beginElementDrag);
+        this.headerRef.addEventListener("dblclick", this.handleDblCLick);
+        this.headerRef.querySelectorAll<HTMLDivElement>(".btn").forEach( (btnEl) => btnEl.addEventListener("click", this.handleBtnClick));
     }
 
     public get heading(): string {
@@ -149,6 +152,18 @@ class DragPage extends HTMLElement {
         return this.getAttribute("color") || this.defaultHeaderColor;
     }
 
+    public get key(): string|undefined {
+        return this.getAttribute("key") || undefined;
+    }
+
+    public set key(newValue: string|undefined){
+        if (newValue) {
+            this.setAttribute("key", newValue)
+        } else {
+            this.removeAttribute("key");
+        }
+    }
+
     attributeChangedCallback(_name: string, _oldValue: string, _newValue: string) {
         if (_name === "color") {
             this.headerRef.style.backgroundColor = _newValue;
@@ -173,9 +188,35 @@ class DragPage extends HTMLElement {
                     break;
             }
         }
-    }
+    };
+
+    private handleDblCLick = (_event: MouseEvent) => {
+        if (!this.disabled && !this.hideControls) {
+            this.minimized = !this.minimized;
+            this.dispatchEvent(new Event("toggleminimize"));
+        }
+    };
 
     private pos: {x: number, y: number} = {x:0, y:0};
+
+    private storePosition(){
+        if (this.key) {
+            window.localStorage.setItem(`drag-pane-${this.key}`, JSON.stringify(this.pos));
+            console.log("sorePosition", this.pos)
+        }
+    }
+
+    private restorePosition(){
+        if (this.key) {
+            const storeValue = window.localStorage.getItem(`drag-pane-${this.key}`);
+            if (storeValue) {
+                this.pos = JSON.parse(storeValue);
+                this.style.top = this.pos.y + "px";
+                this.style.left = this.pos.x + "px";
+                console.log("restorePosition", this.pos)
+            }
+        }
+    }
 
     private didMove: boolean = false;
     // private moveThreshold: number = 5;
@@ -216,6 +257,7 @@ class DragPage extends HTMLElement {
         document.onmousemove = null;
         this.setAttribute("active", "false");
         if (this.didMove) {
+            this.storePosition();
             this.dispatchEvent(new Event("dragend"));
             this.didMove = false;
         }

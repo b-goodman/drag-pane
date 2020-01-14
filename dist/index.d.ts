@@ -12,10 +12,15 @@ declare class DragPage extends HTMLElement {
     set minimized(newState: boolean);
     set color(newColor: string);
     get color(): string;
+    get key(): string | undefined;
+    set key(newValue: string | undefined);
     attributeChangedCallback(_name: string, _oldValue: string, _newValue: string): void;
     private defaultHeaderColor;
     private handleBtnClick;
+    private handleDblCLick;
     private pos;
+    private storePosition;
+    private restorePosition;
     private didMove;
     private beginElementDrag;
     private elementDrag;

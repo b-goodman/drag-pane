@@ -33,7 +33,7 @@ Provide a string to set as the value for text visible in the header.
 
 ### `disabled`
 
-If present or set as `"true"`, disables the drag (and if visible, button) behaviours.  Pane adopts a 'disabled' style.
+If present or set as `"true"`, disables the drag (and if visible, button) behaviors.  Pane adopts a 'disabled' style.
 
 ### `hide-controls`
 
@@ -41,11 +41,15 @@ The minimize and close buttons will not be rendered when this attribute is prese
 
 ### `minimized`
 
-Only the header is visible when this attribute is present or `"true"`.
+Only the header is visible when this attribute is present or `"true"`.  Double clicking the header will also toggle the `minimized` value (unless the pane is `disabled` or `hide-controls` is `true`).
 
 ### `color`
 
 Specify a custom color for the header using a valid css color.
+
+### `key`
+
+If this optional attribute is set with a unique ID, the position of the pane will persist across sessions using `window.localStorage`.  The position is set to `drag-pane-${key}`.
 
 ---
 
