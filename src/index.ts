@@ -182,7 +182,7 @@ class DragPage extends HTMLElement {
                     break;
                 case "minimize":
                     this.minimized = !this.minimized;
-                    this.dispatchEvent(new Event("toggleminimize"));
+                    this.dispatchEvent(new Event("toggleminimize", {bubbles: true, composed: true}));
                     break;
                 default:
                     break;
@@ -193,7 +193,7 @@ class DragPage extends HTMLElement {
     private handleDblCLick = (_event: MouseEvent) => {
         if (!this.disabled && !this.hideControls) {
             this.minimized = !this.minimized;
-            this.dispatchEvent(new Event("toggleminimize"));
+            this.dispatchEvent(new Event("toggleminimize", {bubbles: true, composed: true}));
         }
     };
 
@@ -202,7 +202,6 @@ class DragPage extends HTMLElement {
     private storePosition(){
         if (this.key) {
             window.localStorage.setItem(`drag-pane-${this.key}`, JSON.stringify(this.pos));
-            console.log("sorePosition", this.pos)
         }
     }
 
@@ -213,7 +212,6 @@ class DragPage extends HTMLElement {
                 this.pos = JSON.parse(storeValue);
                 this.style.top = this.pos.y + "px";
                 this.style.left = this.pos.x + "px";
-                console.log("restorePosition", this.pos)
             }
         }
     }
@@ -243,7 +241,7 @@ class DragPage extends HTMLElement {
         this.pos.y = event.clientY;
 
         this.didMove = true;
-        this.dispatchEvent(new Event("dragstart"));
+        this.dispatchEvent(new Event("dragstart", {bubbles: true, composed: true}));
 
         // set the element's new position:
         const newPosition = {top: this.offsetTop - pos2, left: this.offsetLeft - pos1};
@@ -258,7 +256,7 @@ class DragPage extends HTMLElement {
         this.setAttribute("active", "false");
         if (this.didMove) {
             this.storePosition();
-            this.dispatchEvent(new Event("dragend"));
+            this.dispatchEvent(new Event("dragend", {bubbles: true, composed: true}));
             this.didMove = false;
         }
     }

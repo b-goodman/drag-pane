@@ -12,7 +12,7 @@ class DragPage extends HTMLElement {
                         break;
                     case "minimize":
                         this.minimized = !this.minimized;
-                        this.dispatchEvent(new Event("toggleminimize"));
+                        this.dispatchEvent(new Event("toggleminimize", { bubbles: true, composed: true }));
                         break;
                     default:
                         break;
@@ -44,7 +44,7 @@ class DragPage extends HTMLElement {
             this.pos.x = event.clientX;
             this.pos.y = event.clientY;
             this.didMove = true;
-            this.dispatchEvent(new Event("dragstart"));
+            this.dispatchEvent(new Event("dragstart", { bubbles: true, composed: true }));
             const newPosition = { top: this.offsetTop - pos2, left: this.offsetLeft - pos1 };
             this.style.top = newPosition.top + "px";
             this.style.left = newPosition.left + "px";
@@ -55,7 +55,7 @@ class DragPage extends HTMLElement {
             this.setAttribute("active", "false");
             if (this.didMove) {
                 this.storePosition();
-                this.dispatchEvent(new Event("dragend"));
+                this.dispatchEvent(new Event("dragend", { bubbles: true, composed: true }));
                 this.didMove = false;
             }
         };
