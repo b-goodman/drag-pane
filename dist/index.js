@@ -22,7 +22,7 @@ class DragPage extends HTMLElement {
         this.handleDblCLick = (_event) => {
             if (!this.disabled && !this.hideControls) {
                 this.minimized = !this.minimized;
-                this.dispatchEvent(new Event("toggleminimize"));
+                this.dispatchEvent(new Event("toggleminimize", { bubbles: true, composed: true }));
             }
         };
         this.pos = { x: 0, y: 0 };
@@ -211,7 +211,6 @@ class DragPage extends HTMLElement {
     storePosition() {
         if (this.key) {
             window.localStorage.setItem(`drag-pane-${this.key}`, JSON.stringify(this.pos));
-            console.log("sorePosition", this.pos);
         }
     }
     restorePosition() {
@@ -221,7 +220,6 @@ class DragPage extends HTMLElement {
                 this.pos = JSON.parse(storeValue);
                 this.style.top = this.pos.y + "px";
                 this.style.left = this.pos.x + "px";
-                console.log("restorePosition", this.pos);
             }
         }
     }
