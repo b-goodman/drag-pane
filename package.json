@@ -1,7 +1,7 @@
 {
   "name": "drag-pane",
   "description": "Custom element wrapping arbitrary content in a draggable pane.",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
