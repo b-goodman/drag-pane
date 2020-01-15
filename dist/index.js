@@ -207,6 +207,9 @@ class DragPage extends HTMLElement {
         if (_name === "color") {
             this.headerRef.style.backgroundColor = _newValue;
         }
+        if (_name === "heading") {
+            this.headerRef.innerText = _newValue;
+        }
     }
     storePosition() {
         if (this.key) {

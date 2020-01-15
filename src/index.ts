@@ -168,6 +168,9 @@ class DragPage extends HTMLElement {
         if (_name === "color") {
             this.headerRef.style.backgroundColor = _newValue;
         }
+        if (_name === "heading") {
+            this.headerRef.innerText = _newValue;
+        }
     }
 
     private defaultHeaderColor: string = "#2196F3";
